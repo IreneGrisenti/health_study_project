@@ -54,6 +54,12 @@ Dokumentation från w3cub och statsmodels angående *solve_power*:
 **klona projetet**  
 git clone https://github.com/IreneGrisenti/health_study_project.git  
 cd health_study_project
+git checkout -b del1 origin/del1
+
+(eller)  
+  
+**klona bara del1 branch**
+git clone -b del1 --single-branch https://github.com/IreneGrisenti/health_study_project.git
 
 **Skapa och aktivera virtuell miljö**:  
 python -m venv .venv
