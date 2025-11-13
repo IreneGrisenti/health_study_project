@@ -29,7 +29,7 @@ Båda metoderna gav ett mycket liknande resultat.
     - p-värde på **0.326**
 - Eftersom p-värdet är större än 0,05 kan vi inte förkasta H0. Det finns inte tillräcklig evidens för att dra slutsatsen att rökare har högre blodtryck än icke-rökare.
 - Visualisering:  
-![alt text](<img/fig5 violin plot.png>)
+![health_study_project/img/fig5.png](img/fig5.png)
 
 ### Power
 - Både teoretisk och simulerad styrka beräknades för att jämföra resultaten:
