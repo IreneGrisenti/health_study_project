@@ -4,7 +4,7 @@ Denna rapport analyserar en hälsodatamängd med fokus på rökning och blodtryc
 ## Rapport
 ### Beskrivande analys
 - Sammanfattande statistik (medelvärde, median, min, max) beräknas för: age, weight, height, systolic_bp, cholesterol.
-- Visualiseringar:
+- Visualiseringar:  
 ![alt text](img/fig1.png)
 ![alt text](img/fig2.png)
 ![alt text](img/fig3.png)
@@ -54,7 +54,7 @@ Dokumentation från w3cub och statsmodels angående *solve_power*:
 **klona projetet**  
 git clone https://github.com/IreneGrisenti/health_study_project.git  
 cd health_study_project  
-git checkout -b del1 origin/del1
+git checkout -b del1 origin/del1  
 
 (eller)  
   
