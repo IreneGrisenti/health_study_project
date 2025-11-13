@@ -53,7 +53,7 @@ Dokumentation från w3cub och statsmodels angående *solve_power*:
 ## Kom igång
 **klona projetet**  
 git clone https://github.com/IreneGrisenti/health_study_project.git  
-cd health_study_project
+cd health_study_project  
 git checkout -b del1 origin/del1
 
 (eller)  
