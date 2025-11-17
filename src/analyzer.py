@@ -119,9 +119,69 @@ class HealthAnalyzer:
         plt.show()
 
 # Simulation
-def simulation_disease(df, n=1000):
-    p_disease = df["disease"].mean()
-    simulated = np.random.choice([0,1], size=n, p=[1-p_disease, p_disease])
-    return p_disease, simulated.mean()
+    def simulation_disease(self, n=1000, seed=42):
+        np.random.seed(seed)
+        p_disease = self.df["disease"].mean() # Andelen personer i datasetet som har sjukdomen
+        simulated = np.random.choice([0,1], size=n, p=[1-p_disease, p_disease]) # Simulering av 1000 slumpmässiga individer med samma sjukdomsandel
+        p_simulation = simulated.mean() * 100 # Räkna andelen personer med sjukdom i simulering
+        return f"""Verklig sjukdomsfrekvens: {p_disease * 100:.2f}%.
+Simulerad sjukdomsfrekvens: {p_simulation:.2f}%
 
+Slutsats:
+Skillnaden mellan den verkliga sjukdomsfrekvensen och den simulerade sjukdomsfrekvensen är liten 
+och ligger inom den förväntade variationen."""
+# Will fix the output
 
+# Function CI 95% + plot
+    def plot_systolic_bp_confidence_intervals(self, confidence=0.95, B=3000, seed=42, save_path=None):
+        
+        np.random.seed(seed)
+        systolic_bp = np.array(self.df["systolic_bp"], dtype=float)
+
+        # Summary stats
+        m = np.mean(systolic_bp)
+        s = np.std(systolic_bp, ddof=1)
+        n = len(systolic_bp)
+
+        # Normal approximation CI
+        z = 1.96
+        margin_error = z * (s / np.sqrt(n))
+        lo = m - margin_error
+        hi = m + margin_error
+
+        # Bootstrap CI
+        boot_means = np.empty(B)
+        for b in range(B):
+            boot_sample = np.random.choice(systolic_bp, size=n, replace=True)
+            boot_means[b] = np.mean(boot_sample)
+
+        alpha = (1 - confidence) / 2
+        bmean = np.mean(boot_means)
+        blo, bhi = np.percentile(boot_means, [100*alpha, 100*(1 - alpha)])
+
+        # Error bar: jämförelse mellan konfidensintervall beräknat med normalapproximation och med bootstrap
+        fig, ax = plt.subplots()
+        ax.errorbar(0, m, yerr=margin_error, fmt="o", capsize=5, label="Normal Approximation")
+        ax.errorbar(1, bmean, yerr=[[bmean - blo], [bhi - bmean]],
+                    fmt="o", capsize=5, label="Bootstrap")
+
+        ax.set_xticks([0, 1])
+        ax.set_xticklabels(["Normal Approx.", "Bootstrap"])
+        ax.set_ylabel("Systolic BP (mmHg)")
+        ax.set_title(f"{int(confidence*100)}% Confidence Intervals for Systolic BP")
+        ax.legend()
+
+        if save_path:
+            fig.savefig(save_path)
+
+        plt.show()
+
+        return {
+            "Punktuppskattning": m,
+            "Standardavvikelse": s,
+
+            "Resultatet av normalapproximationen är": (lo, hi),
+
+            "Resultatet från bootstrap är": (blo, bhi),
+            "Medelvärde för statistiken": bmean}
+    # Will fix the output
