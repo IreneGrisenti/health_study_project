@@ -4,11 +4,6 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from statsmodels.stats.power import TTestIndPower
 
-# Läsning av datasetet
-def load_data(file_path):
-    df = pd.read_csv(file_path)
-    return df
-
 class HealthAnalyzer:
 
 # Initialize Analyser
@@ -120,9 +115,9 @@ class HealthAnalyzer:
 
 # Simulation
     def simulation_disease(self, n=1000, seed=42):
-        np.random.seed(seed)
+        rng = np.random.default_rng(seed)  # Local random number generato
         p_disease = self.df["disease"].mean() # Andelen personer i datasetet som har sjukdomen
-        simulated = np.random.choice([0,1], size=n, p=[1-p_disease, p_disease]) # Simulering av 1000 slumpmässiga individer med samma sjukdomsandel
+        simulated = rng.choice([0,1], size=n, p=[1-p_disease, p_disease]) # Simulering av 1000 slumpmässiga individer med samma sjukdomsandel
         p_simulation = simulated.mean() * 100 # Räkna andelen personer med sjukdom i simulering
         return f"""Verklig sjukdomsfrekvens: {p_disease * 100:.2f}%.
 Simulerad sjukdomsfrekvens: {p_simulation:.2f}%
@@ -135,7 +130,7 @@ och ligger inom den förväntade variationen."""
 # Function CI 95% + plot
     def plot_systolic_bp_confidence_intervals(self, confidence=0.95, B=3000, seed=42, save_path=None):
         
-        np.random.seed(seed)
+        rng = np.random.default_rng(seed)  # Local random number generator
         systolic_bp = np.array(self.df["systolic_bp"], dtype=float)
 
         # Summary stats
@@ -152,7 +147,7 @@ och ligger inom den förväntade variationen."""
         # Bootstrap CI
         boot_means = np.empty(B)
         for b in range(B):
-            boot_sample = np.random.choice(systolic_bp, size=n, replace=True)
+            boot_sample = rng.choice(systolic_bp, size=n, replace=True)
             boot_means[b] = np.mean(boot_sample)
 
         alpha = (1 - confidence) / 2
