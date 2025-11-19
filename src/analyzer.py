@@ -51,8 +51,8 @@ class HealthAnalyzer:
         """
         Print the number of missing values and duplicated rows in the dataset.
         """
-        print("Saknade värde:\n", self.df.isna().sum())
-        print("Duplicerade rader: ", self.df.duplicated().sum())
+        print("\nSaknade värde:\n", self.df.isna().sum())
+        print("\nDuplicerade rader: ", self.df.duplicated().sum())
 
     def compute_stats(self, columns):
         """
@@ -217,18 +217,11 @@ class HealthAnalyzer:
         simulated = rng.choice([0, 1], size=n, p=[1-p_disease, p_disease])
         p_simulation = simulated.mean() * 100
         p_real = p_disease * 100
-        print(
-            f"Verklig sjukdomsfrekvens:      {p_real:.2f}%\n"
-            f"Simulerad sjukdomsfrekvens:    {p_simulation:.2f}%\n\n"
-            f"Slutsats:\n"
-            f"Skillnaden mellan den verkliga sjukdomsfrekvensen och den simulerade sjukdomsfrekvensen\n"
-            f"är liten och ligger inom den förväntade variationen."
-        )
 
         return {
-            "real_prevalence_percent": p_real,
-            "simulated_prevalence_percent": p_simulation,
-            "difference_percent": round((p_simulation - p_real), 2)
+            "verklig förekomst"     : p_real,
+            "simulerad förekomst"   : p_simulation,
+            "skillnad"              : round((p_simulation - p_real), 2)
         }
 
     def plot_systolic_bp_confidence_intervals(self, confidence=0.95, B=3000, seed=42, save_path=None):
@@ -301,17 +294,13 @@ class HealthAnalyzer:
         plt.show()
 
         print(
-            f"Punktuppskattning: {m:.2f}\n"
-            f"Standardavvikelse: {s:.2f}\n\n"
+            f"Punktuppskattning                     : {m:.2f}\n"
+            f"Standardavvikelse                     : {s:.2f}\n\n"
 
             f"Resultatet av normalapproximationen är: {lo:.2f} - {hi:.2f}\n\n"
 
-            f"Resultatet från bootstrap är: {blo:.2f} - {bhi:.2f}\n"
-            f"Medelvärde för statistiken: {bmean:.2f}\n\n"
-
-            "Slutsats:\n"
-            "Båda metoderna gav ett mycket liknande resultat, vilket tyder på att normalapproximationen\n"
-            "är rimlig för detta data och att samplingfördelningen är nära normal."
+            f"Resultatet från bootstrap är          : {blo:.2f} - {bhi:.2f}\n"
+            f"Medelvärde för statistiken            : {bmean:.2f}\n\n"
         )
 
         return {
