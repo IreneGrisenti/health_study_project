@@ -177,7 +177,7 @@ class HealthAnalyzer:
 
         # Scatter: age vs cholesterol
         ax5.scatter(self.df["age"], self.df["cholesterol"],
-                    color="#988ED5", edgecolor="#777777", alpha=0.4)
+                    color="#988ED5", alpha=0.5)
         ax5.set_title("Age vs Cholesterol")
         ax5.set_xlabel("Age")
         ax5.set_ylabel("Cholesterol level (mmol/L)")
