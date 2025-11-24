@@ -17,9 +17,9 @@ from statsmodels.stats.power import TTestIndPower
 
 def ttest_smokers_vs_non_smokers(smokers, non_smokers):
     """
-    Performs a Welch's t-test (unequal variance) comparing smokers and non-smokers.
+    Performs a Welch's t-test comparing smokers and non-smokers.
 
-    The test is one-sided: H1: mean(smokers) > mean(non-smokers)
+    The test is one-sided - H1: mean(smokers) > mean(non-smokers)
 
     Parameters
     ----------
@@ -124,16 +124,17 @@ def simulate_ttest_power(smokers_mean, non_smokers_mean, sd_smokers, sd_non_smok
     alpha : float, optional
         Significance level. Default is 0.05.
     n_sim : int, optional
-        Number of Monte Carlo simulations. Default is 5.
+        Number of Monte Carlo simulations. Default is 5000.
+    seed : int, optional
         Random seed for reproducibility. Default is 42.
 
     Returns
     -------
     dict
         Dictionary containing:
-        - 'hits': float, proportion of simulations rejecting null hypothesis.
-        - 't stat simulation': float, last simulated t-statistic.
-        - 'p simulation': float, last simulated p-value.
+        - "hits": float, proportion of simulations rejecting null hypothesis.
+        - "t stat simulation": float, last simulated t-statistic.
+        - "p simulation": float, last simulated p-value.
     """
     rng = np.random.default_rng(seed)  # Local random number generato
     rejections = 0
@@ -157,7 +158,7 @@ def simulate_ttest_power(smokers_mean, non_smokers_mean, sd_smokers, sd_non_smok
 
 
 
-def power_analysis(n_smokers, n_non_smokers, sd_smokers, sd_non_smokers, diff_means, alpha=0.05, power_target=0.8):
+def power_analysis(n_smokers, n_non_smokers, sd_smokers, sd_non_smokers, alpha=0.05, power_target=0.8):
     """
     Calculates the required mean difference to achieve a target power.
 
@@ -174,8 +175,6 @@ def power_analysis(n_smokers, n_non_smokers, sd_smokers, sd_non_smokers, diff_me
         Standard deviation of smokers.
     sd_non_smokers : float
         Standard deviation of non-smokers.
-    diff_means : float
-        Observed mean difference between groups.
     alpha : float, optional
         Significance level. Default is 0.05.
     power_target : float, optional
@@ -185,10 +184,8 @@ def power_analysis(n_smokers, n_non_smokers, sd_smokers, sd_non_smokers, diff_me
     -------
     dict
         Dictionary containing:
-        - 'required mean difference': float
-            Mean difference required to achieve the target power.
-        - 'required d': float
-            Cohen's d corresponding to the required mean difference.
+        - "required mean difference": float, mean difference required to achieve the target power.
+        - "required d": float, Cohen's d corresponding to the required mean difference.
     """
     ratio = n_non_smokers / n_smokers
     s_pooled = np.sqrt(((n_smokers - 1) * sd_smokers**2 + (n_non_smokers - 1)
@@ -201,8 +198,7 @@ def power_analysis(n_smokers, n_non_smokers, sd_smokers, sd_non_smokers, diff_me
     required_mean_diff = required_d * s_pooled
 
     print(f"""
-    För att uppnå {power_target*100}% power skulle testet kräva en medelvärdesskillnad på cirka {required_mean_diff:.2f} mmHg (Cohen's d ≈ {required_d:.2f}). 
-    Den observerade skillnaden (≈ {diff_means:.2f} mmHg) är mycket mindre, vilket förklarar den låga styrkan.
+    För att uppnå {power_target*100}% power skulle testet kräva en medelvärdesskillnad på cirka {required_mean_diff:.2f} mmHg (Cohen's d ≈ {required_d:.2f}).
     """)
 
     return {

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class HealthAnalyzer:
     """
-    A class for exploring, cleaning, visualizing, and analyzing 
+    A class for exploring, cleaning, visualizing and analyzing 
     health-related datasets.
 
     Parameters
@@ -51,8 +51,8 @@ class HealthAnalyzer:
         """
         Print the number of missing values and duplicated rows in the dataset.
         """
-        print("\nSaknade värde:\n", self.df.isna().sum())
-        print("\nDuplicerade rader: ", self.df.duplicated().sum())
+        print("\nMissing values:\n", self.df.isna().sum())
+        print("\nDuplicated rows: ", self.df.duplicated().sum())
 
     def compute_stats(self, columns):
         """
@@ -103,7 +103,7 @@ class HealthAnalyzer:
                      bins=20, label=f"{s}", alpha=0.4)
         ax1.set_title("Age distribution per gender")
         ax1.set_xlabel("Age")
-        ax1.set_ylabel("Frequence")
+        ax1.set_ylabel("Frequency")
         ax1.legend()
 
         # Bar chart: smoker ratio
@@ -211,6 +211,11 @@ class HealthAnalyzer:
         -------
         str
             A formatted string comparing real and simulated disease frequency.
+        dict
+            Dictionary containing:
+            - "real frequency": real disease frequency (%)
+            - "simulated frequency": simulated disease frequency (%)
+            - "difference": difference between simulated and real (%)
         """
         rng = np.random.default_rng(seed)
         p_disease = self.df["disease"].mean()
@@ -219,9 +224,9 @@ class HealthAnalyzer:
         p_real = p_disease * 100
 
         return {
-            "verklig förekomst"     : p_real,
-            "simulerad förekomst"   : p_simulation,
-            "skillnad"              : round((p_simulation - p_real), 2)
+            "real frequency,"     : p_real,
+            "simulated frequency"   : p_simulation,
+            "difference"              : round((p_simulation - p_real), 2)
         }
 
     def plot_systolic_bp_confidence_intervals(self, confidence=0.95, B=3000, seed=42, save_path=None):
@@ -244,11 +249,16 @@ class HealthAnalyzer:
         -------
         dict
             Dictionary containing:
-            - Punktuppskattning : float
-            - Standardavvikelse : float
+            - Point estimate : float
+            - Standard deviation : float
             - Normalapproximation CI : tuple (lower, upper)
             - Bootstrap CI : tuple (lower, upper)
             - Bootstrap mean : float
+
+        Notes
+        -----
+        The function also produces a plot comparing the normal approximation CI
+        and bootstrap CI with error bars.
         """
         rng = np.random.default_rng(seed)  # Local random number generator
         systolic_bp = np.array(self.df["systolic_bp"], dtype=float)
@@ -304,8 +314,8 @@ class HealthAnalyzer:
         )
 
         return {
-            "Punktuppskattning": m,
-            "Standardavvikelse": s,
-            "Resultatet av normalapproximationen är": (lo, hi),
-            "Resultatet från bootstrap är": (blo, bhi),
-            "Medelvärde för statistiken": bmean}
+            "Point estimate": m,
+            "Standard deviation": s,
+            "Normal approximation CI": (lo, hi),
+            "Bootstrap CI": (blo, bhi),
+            "Bootstrap mean": bmean}
