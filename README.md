@@ -114,8 +114,8 @@ git checkout -b del2 origin/del2
 (eller)  
   
 **klona bara del2 branch**  
-git clone -b del2 --single-branch https://github.com/IreneGrisenti/health_study_project.git
-cd health_study_project 
+git clone -b del2 --single-branch https://github.com/IreneGrisenti/health_study_project.git     
+cd health_study_project  
 
 **Skapa och aktivera virtuell miljö**:  
 python -m venv .venv
