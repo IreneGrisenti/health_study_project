@@ -49,7 +49,7 @@ Det innebär att **ålder är en viktig, men inte ensam, förklarande faktor.**
 ![alt text](img/fig6.png)
 
 ### Multipel linjär regression
-För att förstå vilka faktorer som mest påverkar systoliskt blodtryck i datasettet, använder jag *ålder, vikt, längd samt kolesterol* som prediktorer.
+För att förstå vilka faktorer som mest påverkar systoliskt blodtryck i datasettet, använder jag *ålder, vikt, längd* samt *kolesterol* som prediktorer.
 
 Prediktorerna standardiserades för att jämföra effekter:
 - **Ålder** är den starkast påverkande faktorn. En ökning med en standardavvikelse förväntas öka systoliskt blodtryck med ~7.6 mmHg.  
@@ -60,7 +60,7 @@ Modellen förklarar cirka **41% av variationen** i blodtrycket (R² ≈ 0.41), v
 **Ytterligare faktorer kan behöva undersökas** för att bättre förstå variationen i systoliskt blodtryck.
 
 - Visualisering:
-![alt text](img/fig8.png)
+![alt text](img/fig7.png)
 
 ### Principal Component Analysis (PCA)
 PCA hjälper till att identifiera vilka variabler som är mest dominerande för att förklara skillnader mellan individer:  
@@ -71,7 +71,7 @@ PCA hjälper till att identifiera vilka variabler som är mest dominerande för 
 PCA-resultatet visar att ålder, **blodtryck och kolesterol** förklarar den största delen av variationen i datasetet. **Längd och vikt** står för den näst största delen av variationen.
 
 - Visualisering:  
-![alt text](img/fig7.png)
+![alt text](img/fig8.png)
 
 ### Källor
 **Konfidensintervall**:  
@@ -109,7 +109,7 @@ PCA-resultatet visar att ålder, **blodtryck och kolesterol** förklarar den st�
 **klona projetet**  
 git clone https://github.com/IreneGrisenti/health_study_project.git  
 cd health_study_project  
-git checkout -b del1 origin/del1  
+git checkout -b del2 origin/del2  
 
 (eller)  
   
