@@ -23,8 +23,8 @@ Båda metoderna ger mycket liknande resultat, vilket tyder på att normalapproxi
 ![alt text](img/fig4.png)
 
 ### Hypotesprövning
-H0: Rökare och icke-rökare har samma blodtryck *(mean_smokers = mean_non_smokers)*  
-H1: Rökare har högre blodtryck än icke-rökare *(mean_smokers > mean_non_smokers)*  
+H₀: Rökare och icke-rökare har samma blodtryck *(mean_smokers = mean_non_smokers)*  
+H₁: Rökare har högre blodtryck än icke-rökare *(mean_smokers > mean_non_smokers)*  
 
 Eftersom p-värdet (p ≈ 0.32) är större än 0,05 kan vi inte förkasta H0. Teststatistiken var låg (t ≈ 0.45), vilket bekräftar att den observerade skillnaden inte är statistiskt signifikant. Det finns inte tillräckligt med bevis för att dra slutsatsen att rökare har högre blodtryck än icke-rökare.
 - Visualisering:  
@@ -59,7 +59,7 @@ Prediktorerna standardiserades för att jämföra effekter:
 Modellen förklarar cirka **41% av variationen** i blodtrycket (R² ≈ 0.41), vilket innebär att en stor del av variationen fortfarande inte förklaras av de inkluderade variablerna.  
 **Ytterligare faktorer kan behöva undersökas** för att bättre förstå variationen i systoliskt blodtryck.
 
-- Visualisering:
+- Visualisering:  
 ![alt text](img/fig7.png)
 
 ### Principal Component Analysis (PCA)
@@ -90,16 +90,16 @@ PCA-resultatet visar att ålder, **blodtryck och kolesterol** förklarar den st�
 **Linjär Regression**:  
 - https://www.youtube.com/watch?v=ZsJ-DbKpD3s&t=4036s [24/11/2025]
 
-**PCA**:  
-- https://www.geeksforgeeks.org/data-analysis/principal-component-analysis-pca/ [24/11/2025]
-- https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html [24/11/2025]
-
 **Multipel Regression**:
 - https://www.w3schools.com/python/python_ml_multiple_regression.asp [24/11/2025]
 - https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html [24/11/2025]
 - *Scaling*: 
     - https://www.w3schools.com/python/python_ml_scale.asp [24/11/2025]
     - https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html [24/11/2025]
+
+**PCA**:  
+- https://www.geeksforgeeks.org/data-analysis/principal-component-analysis-pca/ [24/11/2025]
+- https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html [24/11/2025]
 
 ## Miljö
 - Python: 3.13.7
@@ -115,6 +115,7 @@ git checkout -b del2 origin/del2
   
 **klona bara del2 branch**  
 git clone -b del2 --single-branch https://github.com/IreneGrisenti/health_study_project.git
+cd health_study_project 
 
 **Skapa och aktivera virtuell miljö**:  
 python -m venv .venv
