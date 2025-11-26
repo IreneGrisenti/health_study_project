@@ -1,4 +1,4 @@
-# Hälsostudie - Dataanalys i Python
+# Hälsostudie - Data analys i Python
 
 Detta projekt är en tvådelad analys av ett hälsodataset med information om bland annat ålder, kön, längd, vikt, blodtryck, kolesterol, rökvanor och sjukdomsförekomst.  
 Arbetet utfördes i Jupyter Notebook och versionhanterades i två separata branches enligt kursens upplägg.  
