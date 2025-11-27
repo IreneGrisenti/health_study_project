@@ -25,15 +25,12 @@ Datasetet finns i *data/health_study_dataset.csv*.
 
 ## Kom igång
 **klona projetet**  
-git clone https://github.com/IreneGrisenti/health_study_project.git  
-cd health_study_project  
-git checkout -b del2 origin/del2  
+git clone https://github.com/IreneGrisenti/health_study_project.git   
   
 eller  
 
 **klona bara del2 branch**  
 git clone -b del2 --single-branch https://github.com/IreneGrisenti/health_study_project.git  
-cd health_study_project
 
 **Skapa och aktivera virtuell miljö**:  
 python -m venv .venv
@@ -45,4 +42,5 @@ python -m venv .venv
 source .venv/bin/activate
 
 **Installera beroenden**:  
-python -m pip install -r requirements.txt
+cd health_study_project  
+python -m pip install -r requirements.txt  
